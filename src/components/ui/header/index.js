@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { Button } from '../button'
 import { Sheet, SheetContent, SheetTrigger } from '../sheet'
 import { AlignJustify } from 'lucide-react'
+import { UserButton } from '@clerk/nextjs'
 
-function Header() {
+function Header({ user, profileInfo }) {
    const menuItems = [
       {
          label: 'Home',
@@ -15,59 +16,52 @@ function Header() {
       {
          label: 'Feed',
          path: '/feed',
-         show: true,
-         //  show: profileInfo,
+         show: profileInfo,
       },
       {
          label: 'Login',
          path: '/sign-in',
-         show: true,
-         //  show: !user,
+         show: !user,
       },
       {
          label: 'Register',
          path: '/sign-up',
-         show: true,
-         //  show: !user,
+         show: !user,
       },
       {
          label: 'Activity',
          path: '/activity',
-         show: true,
-         //  show: profileInfo?.role === 'candidate',
+         show: profileInfo?.role === 'candidate',
       },
       {
          label: 'Companies',
          path: '/companies',
-         show: true,
-         //  show: profileInfo?.role === 'candidate',
+         show: profileInfo?.role === 'candidate',
       },
       {
          label: 'Jobs',
          path: '/jobs',
-         show: true,
-         //  show: profileInfo,
+         show: profileInfo,
       },
       {
          label: 'Membership',
          path: '/membership',
-         show: true,
-         //  show: profileInfo,
+         show: profileInfo,
       },
       {
          label: 'Account',
          path: '/account',
-         show: true,
-         //  show: profileInfo,
+         show: profileInfo,
       },
    ]
 
    return (
       <div>
          <header className='flex h-16 w-full shrink-0 items-center'>
+            {/* sheet for the mobile version */}
             <Sheet>
                <SheetTrigger asChild>
-                  <Button>
+                  <Button className='lg:hidden'>
                      <AlignJustify className='h-6 w-6' />
                      <span className='sr-only'>Toggle Navigation Menu</span>
                   </Button>
@@ -88,8 +82,25 @@ function Header() {
                         ) : null
                      )}
                   </div>
+                  <UserButton fallbackRedirectUrl='/' />
                </SheetContent>
             </Sheet>
+            <Link className='hidden lg:flex mr-6' href={'/'}>
+               JOBSCO
+            </Link>
+            <nav className='ml-auto hidden lg:flex gap-6'>
+               {menuItems.map((menuItem) =>
+                  menuItem.show ? (
+                     <Link
+                        href={menuItem.path}
+                        className='group inline-flex h-9 w-max items-center rounded-md bg-white px-4 py-2 text-sm font-medium'
+                     >
+                        {menuItem.label}
+                     </Link>
+                  ) : null
+               )}
+               <UserButton fallbackRedirectUrl='/' />
+            </nav>
          </header>
       </div>
    )
