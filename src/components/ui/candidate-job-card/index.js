@@ -20,7 +20,8 @@ import { createJobApplicationAction } from '@/app/actions'
 
 function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
    const [showJobDetailsDrawer, setShowJobDetailsDrawer] = useState(false)
-
+   console.log(jobItem)
+   console.log(profileInfo)
    async function handleJobApply() {
       await createJobApplicationAction(
          {
@@ -46,7 +47,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
             <CommonCard
                icon={<JobIcon />}
                title={jobItem?.title}
-               description={jobItem.companyName}
+               description={jobItem?.companyName}
                footerContent={
                   <Button
                      onClick={() => setShowJobDetailsDrawer(true)}
@@ -68,14 +69,14 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
                            onClick={handleJobApply}
                            disabled={
                               jobApplications.findIndex(
-                                 (item) => item.jobID === jobItem?._id
+                                 (item) => item?.jobID === jobItem?._id
                               ) > -1
                                  ? true
                                  : false
                            }
                         >
                            {jobApplications.findIndex(
-                              (item) => item.jobID === jobItem?._id
+                              (item) => item?.jobID === jobItem?._id
                            ) > -1
                               ? 'Applied'
                               : 'Apply'}

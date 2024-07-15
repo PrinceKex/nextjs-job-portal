@@ -32,18 +32,18 @@ function OnBoard() {
 
    function handleFileChange(event) {
       event.preventDefault()
-      console.log(event.target.files)
+      //console.log(event.target.files)
       setFile(event.target.files[0])
    }
 
    async function handleUploadPdfToSupabase() {
       const { data, error } = await supabaseClient.storage
-         .from('job-board')
+         .from('job-board-public')
          .upload(`public/${file.name}`, file, {
             cacheControl: '3600',
             upsert: false,
          })
-      console.log(data, error)
+      //console.log(data, error)
       if (data) {
          setCandidateFormData({
             ...candidateFormData,
