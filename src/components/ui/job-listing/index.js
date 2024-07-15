@@ -1,9 +1,10 @@
 'use client'
 
+import CandidateJobCard from '../candidate-job-card'
 import PostNewJob from '../post-new-job'
 import RecruiterJobCard from '../recruiter-job-card'
 
-function JobListing({ user, profileInfo, jobList }) {
+function JobListing({ user, profileInfo, jobList, jobApplications }) {
    return (
       <div>
          <div className='mx-auto max-w-7xl'>
@@ -29,9 +30,17 @@ function JobListing({ user, profileInfo, jobList }) {
                            {jobList && jobList.length > 0
                               ? jobList.map((jobItem) =>
                                    profileInfo?.role === 'candidate' ? (
-                                      <p>candidate</p>
+                                      <CandidateJobCard
+                                         jobItem={jobItem}
+                                         profileInfo={profileInfo}
+                                         jobApplications={jobApplications}
+                                      />
                                    ) : (
-                                      <RecruiterJobCard jobItem={jobItem} />
+                                      <RecruiterJobCard
+                                         jobItem={jobItem}
+                                         profileInfo={profileInfo}
+                                         jobApplications={jobApplications}
+                                      />
                                    )
                                 )
                               : null}
