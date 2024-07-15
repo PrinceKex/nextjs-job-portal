@@ -16,7 +16,7 @@ export async function createProfileAction(formData, pathToRevalidate) {
 // fetch profile information
 export async function fetchProfileAction(id) {
    await connectToDB()
-   const result = await Profile.findOne({ userid: id })
+   const result = await Profile.findOne({ userId: id })
 
    return JSON.parse(JSON.stringify(result))
 }
