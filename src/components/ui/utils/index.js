@@ -1,3 +1,5 @@
+import qs from 'query-string'
+
 export const recruiterOnboardFormControls = [
    {
       label: 'Name',
@@ -206,4 +208,46 @@ export const initialPostNewJobFormData = {
    experience: '',
    description: '',
    skills: '',
+}
+
+export const filterMenuDataArray = [
+   {
+      id: 'companyName',
+      label: 'Company Name',
+   },
+   {
+      id: 'title',
+      label: 'Title',
+   },
+
+   {
+      id: 'type',
+      label: 'Type',
+   },
+
+   {
+      id: 'location',
+      label: 'Location',
+   },
+]
+
+export function formUrlQuery({ params, dataToAdd }) {
+   let currentURL = qs.parse(params)
+
+   if (Object.keys(dataToAdd) > 0) {
+      Object.keys(dataToAdd).map((key) => {
+         if (dataToAdd[key].length === 0) delete currentURL[key]
+         else currentURL[key] = dataToAdd[key].join(',')
+      })
+   }
+
+   return qs.stringifyUrl(
+      {
+         url: window.location.pathname,
+         query: currentURL,
+      },
+      {
+         skipNull: true,
+      }
+   )
 }
