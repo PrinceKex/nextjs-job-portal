@@ -1,6 +1,8 @@
 'use client'
 
-import { Tabs, TabsList } from '../tabs'
+import CommonCard from '../common-card'
+import JobIcon from '../job-icon'
+import { Tabs, TabsContent, TabsList } from '../tabs'
 
 function CandidateActivity({ jobList, jobApplicants }) {
    const uniqueStatusArray = [
@@ -17,12 +19,45 @@ function CandidateActivity({ jobList, jobApplicants }) {
                <h1 className='text-4xl tracking-tight font-bold text-gray-900'>
                   Your Activity
                </h1>
+               <TabsList>
+                  {uniqueStatusArray.map((status) => (
+                     <TabsTrigger value={status}>{status}</TabsTrigger>
+                  ))}
+               </TabsList>
             </div>
-            <TabsList>
-               {uniqueStatusArray.map((status) => (
-                  <TabsTrigger value={status}>{status}</TabsTrigger>
-               ))}
-            </TabsList>
+            <div className='pb-24 py-6'>
+               <div className='container mx-auto p-0 space-y-8'>
+                  <div className='flex flex-col gap-4'>
+                     {uniqueStatusArray.map((status) => (
+                        <TabsContent value={status}>
+                           {jobList
+                              .filter(
+                                 (jobItem) =>
+                                    jobApplicants
+                                       .filter(
+                                          (jobApplication) =>
+                                             jobApplication.status.indexOf(
+                                                status
+                                             ) > -1
+                                       )
+                                       .findIndex(
+                                          (filteredItemByStatus) =>
+                                             jobItem._id ===
+                                             filteredItemByStatus.jobID
+                                       ) > -1
+                              )
+                              .map((finalFilteredItem) => (
+                                 <CommonCard
+                                    icon={<JobIcon />}
+                                    title={finalFilteredItem?.title}
+                                    description={finalFilteredItem?.companyName}
+                                 />
+                              ))}
+                        </TabsContent>
+                     ))}
+                  </div>
+               </div>
+            </div>
          </Tabs>
       </div>
    )
