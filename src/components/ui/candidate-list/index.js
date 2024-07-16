@@ -8,10 +8,10 @@ import {
    updateJobApplicationAction,
 } from '@/app/actions'
 import { createClient } from '@supabase/supabase-js'
-
+const supabaseKey = process.env.SUPABASE_API_KEY
 const supabaseClient = createClient(
    'https://nrlvoxbjafgcqlwuprfy.supabase.co',
-   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ybHZveGJqYWZnY3Fsd3VwcmZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEwMjkwNjQsImV4cCI6MjAzNjYwNTA2NH0.ZySL6BNqARO_qPCL_LHksz-GCTU4q3_b5ULF9qcgxJ0'
+   supabaseKey
 )
 
 function CandidateList({
