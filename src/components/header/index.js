@@ -67,7 +67,10 @@ function Header({ user, profileInfo }) {
                   </Button>
                </SheetTrigger>
                <SheetContent side='left'>
-                  <Link className='mr-6 hidden lg:flex' href={'#'}>
+                  <Link
+                     className='mr-6 hidden font-bold text-3xl lg:flex'
+                     href={'/'}
+                  >
                      <h3>JOBSCO</h3>
                   </Link>
                   <div className='grid gap-2 py-6'>
