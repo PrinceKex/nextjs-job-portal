@@ -1,4 +1,4 @@
-import OnBoard from '@/components/ui/on-board'
+import OnBoard from '@/components/on-board'
 
 import { redirect } from 'next/navigation'
 import { fetchProfileAction } from '../actions'

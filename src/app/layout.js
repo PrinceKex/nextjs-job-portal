@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Suspense } from 'react'
 import Loading from './loading'
-import CommonLayout from '@/components/ui/common-layout'
+import CommonLayout from '@/components/common-layout'
 import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })

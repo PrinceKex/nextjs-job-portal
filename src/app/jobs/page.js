@@ -1,4 +1,4 @@
-import JobListing from '@/components/ui/job-listing'
+import JobListing from '@/components/job-listing'
 import {
    createFilterCategotyAction,
    fetchJobApplicationForCandidateAction,
